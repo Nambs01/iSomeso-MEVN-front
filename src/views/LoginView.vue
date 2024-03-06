@@ -2,7 +2,7 @@
   <div class="login">
     <div class="box">
       <div class="form">
-          <h1><CommunityIcon/>  iSomeso</h1>
+          <h1><IconMessage/>  iSomeso</h1>
           <div class="inputbox">
               <input type="text" v-model="email" required>
               <span>Adresse email</span>
@@ -27,7 +27,7 @@
 
 <script setup>
   import "../assets/loginStyle.css";
-  import CommunityIcon from '../components/icons/IconCommunity.vue'
+  import IconMessage from '../components/icons/IconMessage.vue'
   import { ref } from "vue";
   import { useAuthStore } from "@/stores/auth.store";
 

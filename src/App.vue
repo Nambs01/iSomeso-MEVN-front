@@ -1,9 +1,12 @@
 <script setup>
-import { onBeforeMount } from 'vue';
+import { onMounted } from 'vue';
 import { RouterView } from 'vue-router'
 import { useAuthStore } from './stores/auth.store';
-onBeforeMount( () => {
+import { useMessageStore } from '@/stores/message.store';
+
+onMounted( () => {
   useAuthStore().init()
+  useMessageStore().getLastMessages()
 })
 </script>
 

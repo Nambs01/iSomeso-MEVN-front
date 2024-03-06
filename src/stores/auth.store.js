@@ -4,7 +4,11 @@ import router from "@/router";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
-    user: null,
+    user: {
+      name: "",
+      email: "",
+      avatar: ""
+    },
     token: "",
     errorMessage: ""
   }),
@@ -22,7 +26,6 @@ export const useAuthStore = defineStore("auth", {
           if(response.data.user){
             this.user = response.data.user
             this.token = response.data.token
-            console.log(this.user)
             this.errorMessage = ""     
           }
         }).catch((error) => {
@@ -32,8 +35,8 @@ export const useAuthStore = defineStore("auth", {
       this.redirect()  
     },
     redirect(){
-      if(this.user)
-        return router.push({ name: "home" })
+      if(this.user.name)
+        return router.push({ name: "home" })  
       router.push({ name: "login" })
     },
     
