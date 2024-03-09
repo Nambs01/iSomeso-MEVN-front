@@ -3,16 +3,16 @@ import { createVuetify } from 'vuetify'
 
 export const vuetify = createVuetify({
   theme: {
-    defaultTheme: "dark",
+    defaultTheme: 'dark',
     dark: true,
-    themes:{
+    themes: {
       colors: {
-        background: "#fff"
+        background: '#fff'
       }
     }
   },
   icons: {
-    defaultSet: 'mdi', // This is already the default value - only for display purposes
+    defaultSet: 'mdi' // This is already the default value - only for display purposes
   }
 })
 

@@ -1,18 +1,18 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body{
+.center {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: var(--color-background)
+  background-color: var(--color-background);
 }
 
-.box{
+.box {
   position: relative;
   width: 380px;
   height: 430px;
@@ -21,7 +21,7 @@ body{
   overflow: hidden;
 }
 
-.box::before{
+.box::before {
   content: '';
   position: absolute;
   top: -50%;
@@ -33,7 +33,7 @@ body{
   animation: animate 6s linear infinite;
 }
 
-.box::after{
+.box::after {
   content: '';
   position: absolute;
   top: -50%;
@@ -46,13 +46,16 @@ body{
   animation-delay: -3s;
 }
 
-@keyframes animate{
-  0%{transform: rotate(0deg);}
-  100%{transform: rotate(360deg);}
+@keyframes animate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-
-.form{
+.form {
   position: absolute;
   inset: 2px;
   background: var(--color-background);
@@ -63,20 +66,20 @@ body{
   flex-direction: column;
 }
 
-.form h1{
+.form h1 {
   color: var(--color);
   text-align: center;
   font-weight: 500;
   letter-spacing: 0.1em;
 }
 
-.inputbox{
+.inputbox {
   position: relative;
   width: 300;
   margin-top: 35px;
 }
 
-.inputbox input{
+.inputbox input {
   position: relative;
   width: 100%;
   padding: 20px 10px 10px;
@@ -89,7 +92,7 @@ body{
   z-index: 10;
 }
 
-.inputbox span{
+.inputbox span {
   position: absolute;
   left: 0;
   padding: 20px 0px 10px;
@@ -100,14 +103,14 @@ body{
   transition: 0.5s;
 }
 
-.inputbox input:valid ~span,
-.inputbox input:focus ~span{
+.inputbox input:valid ~ span,
+.inputbox input:focus ~ span {
   color: var(--color);
   transform: translateY(-34px);
   font-size: 0.75em;
 }
 
-.inputbox i{
+.inputbox i {
   position: absolute;
   left: 0;
   bottom: 0;
@@ -120,28 +123,28 @@ body{
   z-index: 9;
 }
 
-.inputbox input:valid ~i,
-.inputbox input:focus ~i{
+.inputbox input:valid ~ i,
+.inputbox input:focus ~ i {
   height: 38px;
 }
 
-.links{
+.links {
   display: flex;
   justify-content: space-between;
 }
 
-.links a{
+.links a {
   margin: 10px 0;
   font-size: 0.75em;
   color: #8f8f8f;
   text-decoration: none;
 }
 .links a:hover,
-.links a:nth-child(2){
+.links a:nth-child(2) {
   color: var(--color);
 }
 
-input[type="submit"]{
+input[type='submit'] {
   border: none;
   outline: none;
   color: var(--color-background);
@@ -154,6 +157,6 @@ input[type="submit"]{
   cursor: pointer;
 }
 
-input[type="submit"]:active{
+input[type='submit']:active {
   opacity: 0.8;
 }

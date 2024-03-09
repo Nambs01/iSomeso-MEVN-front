@@ -1,21 +1,33 @@
-import { chat_api } from "@/services/chatAPI.service";
-import { defineStore } from "pinia";
-import { useAuthStore } from "./auth.store";
+import { iSomesoApi } from '@/services/API.service'
+import { defineStore } from 'pinia'
+import { useAuthStore } from './auth.store'
 
 const auth = useAuthStore()
 
 export const useUserStore = defineStore('user', {
   state: () => ({
-    errorMessage: ""
+    users: [
+      {
+        _id: '',
+        name: '',
+        email: '',
+        avatar: {
+          base64: '',
+          type: ''
+        }
+      }
+    ],
+    errorMessage: ''
   }),
   actions: {
-    async createUser(user){
-      await chat_api.post('/users', user)
+    async createUser(user) {
+      await iSomesoApi
+        .post('/users', user)
         .then(() => {
           auth.login(user.email, user.password)
-          this.errorMessage = ""
+          this.errorMessage = ''
         })
-        .catch((error) => this.errorMessage = error.response.data.error)
+        .catch((error) => (this.errorMessage = error.response.data.error))
     }
   }
 })

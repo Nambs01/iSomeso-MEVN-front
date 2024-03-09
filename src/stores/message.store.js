@@ -1,31 +1,40 @@
-import { defineStore } from "pinia";
-import { chat_api } from "@/services/chatAPI.service";
+import { defineStore } from 'pinia'
+import { iSomesoApi } from '@/services/API.service'
 
-export const useMessageStore = defineStore("message", {
+export const useMessageStore = defineStore('message', {
   state: () => ({
-    messages: Array({
-      _id: "",
-      to: "",
-      from: "",
-      text: "",
-      vue: "",
-      createdAt: ""
-    })
+    messages: [
+      {
+        _id: '',
+        to: {
+          _id: '',
+          name: ''
+        },
+        from: {
+          _id: '',
+          name: ''
+        },
+        text: '',
+        vue: '',
+        createdAt: ''
+      }
+    ]
   }),
 
   actions: {
-    async getLastMessages(){
-      const token = localStorage.getItem('token') 
-      
-      if(token){
-        await chat_api.get('/messages', {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        }).then((response) => {
-          this.messages = response.data.messages
-          console.log(this.messages)
-        })
+    async getLastMessages() {
+      const token = localStorage.getItem('token')
+
+      if (token) {
+        await iSomesoApi
+          .get('/messages', {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          })
+          .then((response) => {
+            this.messages = response.data.messages
+          })
       }
     }
   }

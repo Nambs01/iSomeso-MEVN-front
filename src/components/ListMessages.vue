@@ -1,18 +1,13 @@
 <template>
   <div class="my-5">
-      <div class="mb-2 p-2" v-for="message in props.messages" :key="message._id" style="background: red;">
-        <p>{{ message.createdAt }}</p>
-        <p>{{ message.text }}</p>
-      </div>
+    <MessageItem v-for="message in props.messages" :message="message" :key="message._id" />
   </div>
 </template>
 
 <script setup>
+import MessageItem from './MessageItem.vue'
 
 const props = defineProps(['messages'])
-
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
