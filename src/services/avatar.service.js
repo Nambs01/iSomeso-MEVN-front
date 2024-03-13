@@ -1,7 +1,7 @@
 import { iSomesoApi } from './API.service'
 
 export const getAvatar = async (id) => {
-  let avatar = null
+  let avatar = ''
   await iSomesoApi
     .get('/users/' + id + '/avatar')
     .then((response) => {
