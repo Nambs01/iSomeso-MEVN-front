@@ -1,21 +1,22 @@
 <template>
   <div class="content">
     <p>{{ temps }}</p>
-    <p :class="destinataire() ? 'textMessage destinataire' : 'textMessage'">{{ props.message.text }}</p>
+    <p :class="destinataire() ? 'textMessage destinataire' : 'textMessage'">
+      {{ props.message.text }}
+    </p>
   </div>
 </template>
 
 <script setup>
-import { useAuthStore } from '@/stores/auth.store';
+import { useAuthStore } from '@/stores/auth.store'
 
 const auth = useAuthStore().me
 const props = defineProps(['message'])
 
-const temps = (new Date(props.message.createdAt)).toLocaleString()
+const temps = new Date(props.message.createdAt).toLocaleString()
 
 const destinataire = () => {
-  if(auth._id == props.message.to)
-    return true
+  if (auth._id == props.message.to) return true
   else return false
 }
 </script>
@@ -35,7 +36,7 @@ const destinataire = () => {
 }
 
 .destinataire {
-  background: #00C4A7;
+  background: #00c4a7;
   float: right;
 }
 </style>

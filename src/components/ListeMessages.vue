@@ -13,15 +13,25 @@
     </div>
 
     <div class="hero-body">
-      <MessageItem v-for="message in useMessageStore().messages" :key="message._id" :message="message"/>
+      <MessageItem
+        v-for="message in useMessageStore().messages"
+        :key="message._id"
+        :message="message"
+      />
     </div>
-    
+
     <div class="hero-foot">
       <div class="columns m-0">
         <div class="column is-11">
-          <input type="text" class="input is-primary" placeholder="Texte de message" v-model="textMessage" autofocus>
+          <input
+            type="text"
+            class="input is-primary"
+            placeholder="Texte de message"
+            v-model="textMessage"
+            autofocus
+          />
         </div>
-        
+
         <div class="column is-1">
           <button class="button is-primary">
             <span class="icon has-text-dark">
@@ -35,13 +45,12 @@
 </template>
 
 <script setup>
-import MessageItem from './MessageItem.vue';
-import { ref } from 'vue';
-import { useMessageStore } from '@/stores/message.store';
+import MessageItem from './MessageItem.vue'
+import { ref } from 'vue'
+import { useMessageStore } from '@/stores/message.store'
 
 const props = defineProps(['user'])
 const textMessage = ref('')
-
 </script>
 
 <style scoped>
