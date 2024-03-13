@@ -20,29 +20,26 @@
               <span class="icon">
                 <i class="mdi mdi-account-circle-outline"></i>
               </span>
-              <span>{{ props.user.email }}</span>
+              <span>{{ user.me.email }}</span>
             </button>
           </div>
 
           <div class="dropdown-menu is-size-7" id="dropdown-menu1" role="menu">
             <div class="dropdown-content pt-0">
-              <div
-                style="
-                  position: relative;
-                  height: 75px;
-                  margin-bottom: 50px;
-                  border-radius: 5px 5px 0 0;
-                "
-              >
-                <!-- <svg height="100" width="100" style="position: absolute; bottom: -50px;left: 45px;">
-                  <circle cx="50" cy="50" r="40" stroke="white" stroke-width="3" fill="grey" />
-                </svg> -->
+              <div class="has-text-centered py-4">
                 <img
-                  v-if="props.user.avatar.type"
-                  :src="
-                    'data:image/' + props.user.avatar.type + ';base64,' + props.user.avatar.base64
-                  "
+                  v-if="!true"
+                  class="avatar"
+                  :src="'data:image/' + user.me.avatar.type + ';base64,' + user.me.avatar.base64"
+                  width="75"
+                  height="75"
                 />
+                <div v-else class="icon-text">
+                  <span class="icon is-medium is-black">
+                    <i class="mdi mdi-36px mdi-account-circle-outline"></i>
+                  </span>
+                </div>
+                <p class="has-text-black is-size-6">{{ user.me.name }}</p>
               </div>
               <RouterLink to="/" class="navbar-item">
                 <span class="icon">
@@ -66,7 +63,15 @@
 
 <script setup>
 import IconMessage from './icons/IconMessage.vue'
-const props = defineProps(['user'])
+import { useAuthStore } from '@/stores/auth.store'
+
+const user = useAuthStore()
 </script>
 
-<style scoped></style>
+<style scoped>
+.avatar {
+  border-radius: 150px;
+  outline: 3px solid rgb(2, 158, 255);
+  outline-offset: 3px;
+}
+</style>

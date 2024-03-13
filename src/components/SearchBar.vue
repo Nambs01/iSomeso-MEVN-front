@@ -14,10 +14,6 @@
 </template>
 
 <style scoped>
-.columns {
-  width: 100%;
-}
-
 input {
   color: rgba(255, 255, 255, 0.84);
   background: transparent;
