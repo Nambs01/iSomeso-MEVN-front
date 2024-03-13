@@ -9,7 +9,10 @@ export const useAuthStore = defineStore('auth', {
       _id: '',
       name: '',
       email: '',
-      avatar: ''
+      avatar: {
+        type: 'jpg',
+        base64: ''
+      }
     },
     token: '',
     errorMessage: ''
@@ -28,7 +31,9 @@ export const useAuthStore = defineStore('auth', {
           })
           .then(async (response) => {
             if (response.data.user) {
-              this.me = response.data.user
+              this.me._id = response.data.user._id
+              this.me.name = response.data.user.name
+              this.me.email = response.data.user.email
               this.me.avatar = await getAvatar(this.me._id)
               this.token = response.data.token
               this.errorMessage = ''
@@ -36,6 +41,7 @@ export const useAuthStore = defineStore('auth', {
           })
           .catch((error) => {
             this.errorMessage = error.response.data.error
+            console.log(this.errorMessage)
           })
       }
       this.redirect()
@@ -51,9 +57,12 @@ export const useAuthStore = defineStore('auth', {
           email: email,
           password: password
         })
-        .then((response) => {
+        .then(async (response) => {
           if (response.data.user) {
-            this.me = response.data.user
+            this.me._id = response.data.user._id
+            this.me.name = response.data.user.name
+            this.me.email = response.data.user.email
+            this.me.avatar = await getAvatar(this.me._id)
             this.token = response.data.token
             this.errorMessage = ''
             localStorage.setItem('token', this.token)
