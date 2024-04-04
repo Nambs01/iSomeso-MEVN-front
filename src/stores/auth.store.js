@@ -46,6 +46,7 @@ export const useAuthStore = defineStore('auth', {
       }
       this.redirect()
     },
+
     redirect() {
       if (this.me.name) return router.push({ name: 'home' })
       router.push({ name: 'login' })
@@ -72,6 +73,24 @@ export const useAuthStore = defineStore('auth', {
         .catch((error) => {
           this.errorMessage = error.response.data.error
         })
+    },
+
+    async logout() {
+      const token = localStorage.getItem('token')
+
+      if (token) {
+        await iSomesoApi
+          .post('/users/logout', {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          })
+          .then(() => {
+            localStorage.removeItem('token')
+            this.me = null
+            this.redirect()
+          })
+      }
     }
   }
 })

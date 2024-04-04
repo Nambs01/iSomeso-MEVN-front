@@ -13,11 +13,13 @@ export const useUserStore = defineStore('user', {
         avatar: {
           base64: '',
           type: ''
-        }
+        },
+        actif: false
       }
     ],
     errorMessage: ''
   }),
+
   actions: {
     async createUser(user) {
       const auth = useAuthStore()
@@ -45,26 +47,45 @@ export const useUserStore = defineStore('user', {
             this.users = response.data.users
             this.users.forEach(async (user) => {
               user.avatar = await getAvatar(user._id)
+              user.actif = false
             })
+            const compare = (a, b) => {
+              if (a.name < b.name) return 1
+              return -1
+            }
+            this.users.sort(compare)
           })
           .catch((error) => {
             this.errorMessage = error.response.data.error
           })
       }
+    },
+
+    async updateOnlineUsers(onlineUsers) {
+      this.users.map(async (user) => {
+        user.actif = await onlineUsers.some((userOnline) => user._id === userOnline.userId)
+      })
+      const compare = (a, b) => {
+        if (a.actif > b.actif) return 1
+        return -1
+      }
+      this.users.sort(compare)
     }
   },
 
   getters: {
-    getUsersByName(name) {
-      return this.users.filter((user) => {
-        return user.name.includes(name)
-      })
+    getUsersByName: (state) => {
+      return (name) =>
+        state.users.filter((user) => {
+          return user.name.toLowerCase().includes(name.toLowerCase())
+        })
     },
 
-    getUsersById(id) {
-      return this.users.filter((user) => {
-        return user._id == id
-      })
+    getUsersById: (state) => {
+      return (id) =>
+        state.users.find((user) => {
+          return user._id == id
+        })
     }
   }
 })

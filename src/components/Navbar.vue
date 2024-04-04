@@ -20,7 +20,7 @@
               <span class="icon">
                 <i class="mdi mdi-account-circle-outline"></i>
               </span>
-              <span>{{ user.me.email }}</span>
+              <span>{{ user.email }}</span>
             </button>
           </div>
 
@@ -30,7 +30,7 @@
                 <img
                   v-if="!true"
                   class="avatar"
-                  :src="'data:image/' + user.me.avatar.type + ';base64,' + user.me.avatar.base64"
+                  :src="'data:image/' + user.avatar.type + ';base64,' + user.me.avatar.base64"
                   width="75"
                   height="75"
                 />
@@ -39,7 +39,7 @@
                     <i class="mdi mdi-36px mdi-account-circle-outline"></i>
                   </span>
                 </div>
-                <p class="has-text-black is-size-6">{{ user.me.name }}</p>
+                <p class="has-text-black is-size-6">{{ user.name }}</p>
               </div>
               <RouterLink to="/" class="navbar-item">
                 <span class="icon">
@@ -47,12 +47,17 @@
                 </span>
                 <span>Gerer le compte</span>
               </RouterLink>
-              <RouterLink to="/" class="navbar-item button is-danger is-light is-small py-4">
+              <button
+                to="/"
+                class="button is-danger is-light is-small py-4"
+                style="width: 100%"
+                @click="user.logout()"
+              >
                 <span class="icon">
                   <i class="mdi mdi-logout"></i>
                 </span>
                 <span>Deconnecter</span>
-              </RouterLink>
+              </button>
             </div>
           </div>
         </div>
@@ -62,10 +67,17 @@
 </template>
 
 <script setup>
+import { watch,ref } from 'vue';
 import IconMessage from './icons/IconMessage.vue'
 import { useAuthStore } from '@/stores/auth.store'
+// import { connection } from '@/socket'
 
-const user = useAuthStore()
+const user = ref(useAuthStore().me)
+console.log()
+// watch(useAuthStore().me, async (userValue) => {
+//   if(userValue._id)
+//     await connection(userValue._id)
+// })
 </script>
 
 <style scoped>

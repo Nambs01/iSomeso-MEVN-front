@@ -1,8 +1,8 @@
 <template>
-  <div class="my-5">
+  <div class="my-2">
     <DiscussionItem
       class="my-1"
-      v-for="discussion in discussionsStore.discussions"
+      v-for="discussion in useDiscussionStore().discussions"
       :discussion="discussion"
       :key="discussion._id"
       @click="$emit('userChated', userChated(discussion))"
@@ -16,11 +16,8 @@ import { userChated } from '../utils/userChated'
 import { useDiscussionStore } from '@/stores/discussion.store'
 import { onMounted } from 'vue'
 
-const discussionsStore = useDiscussionStore()
-
 onMounted(async () => {
-  await discussionsStore.getLastMessages()
+  await useDiscussionStore().getLastMessages()
 })
 </script>
 
-<style scoped></style>

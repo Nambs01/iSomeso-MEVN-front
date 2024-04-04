@@ -47,6 +47,12 @@ export const useDiscussionStore = defineStore('discussion', {
               discussion.to.avatar = await getAvatar(discussion.to._id)
               discussion.from.avatar = await getAvatar(discussion.from._id)
             })
+
+            const compare = (a, b) => {
+              if (a.createdAt < b.createdAt) return 1
+              return -1
+            }
+            this.discussions.sort(compare)
           })
       }
     }
