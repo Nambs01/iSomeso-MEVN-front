@@ -31,7 +31,7 @@
 <script setup>
 import { userChated } from '../utils/userChated'
 import { formatTime } from '../utils/formatTime'
-import { onMounted, reactive, ref, watch } from 'vue'
+import { reactive, watch } from 'vue'
 
 const props = defineProps(['discussion'])
 const user = reactive({
